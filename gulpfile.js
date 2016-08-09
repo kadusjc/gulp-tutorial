@@ -7,15 +7,19 @@ const minify = require('gulp-minify')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify')
 const browserSync = require('browser-sync').create()
+const preprocess = require('gulp-preprocess');
 const del = require('del')
 
-gulp.task('default', ['images', 'styles', 'scripts']);
+gulp.task('default', ['images', 'styles', 'scripts'])
 
-gulp.task('browserSync', function() {
+gulp.task('server', ['images', 'styles', 'scripts'], () => {
   browserSync.init({
-    server: {
-      baseDir: 'public'
-    },
+      open: false,
+      notify: false,
+      port: 3001,
+      server: {
+        baseDir: './public'
+      }
   })
 })
 
@@ -28,25 +32,24 @@ gulp.task('clean', function() {
   ])
 })
 
-gulp.task('watch', ['browserSync', 'default'], function () {
-  gulp.watch('src/styles/*.css', function() {
-    gulp.run('styles');
+gulp.task('watch', ['server'], () => {
+  gulp.watch('src/styles/*.css', () => {
+    gulp.run('styles')
   })
 
-  gulp.watch('src/images/**/*', function() {
-    gulp.run('images');
+  gulp.watch('src/images/**/*', () => {
+    gulp.run('images')
   })
 
-  gulp.watch('src/scripts/**/*', function() {
-    gulp.run('scripts');
+  gulp.watch('src/scripts/**/*', () => {
+    gulp.run('scripts')
   })
 })
 
-gulp.task('images', function() {
+gulp.task('images', () => {
   const imgSrc = 'src/images/**/*'
   const imgDest = 'public/images'
-
-gulp.src(imgSrc)
+  gulp.src(imgSrc)
     .pipe(changed(imgDest))
     .pipe(imagemin())
     .pipe(gulp.dest(imgDest))
@@ -55,7 +58,7 @@ gulp.src(imgSrc)
     }))
 })
 
-gulp.task('styles', function() {
+gulp.task('styles', () => {
   gulp.src(['src/styles/*.css'])
     .pipe(concat('styles.css'))
     .pipe(autoprefix('last 2 versions'))
@@ -68,10 +71,11 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', () => {
   gulp.src('src/scripts/**/*.js')
-   .pipe(concat('all-scripts.js'))
-   .pipe(uglify())
-   .pipe(gulp.dest('public/scripts/'))
-   .pipe(browserSync.reload({
+    .pipe(preprocess())
+    .pipe(concat('all-scripts.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/scripts/'))
+    .pipe(browserSync.reload({
       stream: true
     }))
 })

@@ -16,6 +16,7 @@
     "gulp-imagemin": "^3.0.2",
     "gulp-minify": "0.0.14",
     "gulp-minify-css": "^1.2.4",
+    "gulp-preprocess": "^2.0.0",
     "gulp-uglify": "^2.0.0"
   }
 }
