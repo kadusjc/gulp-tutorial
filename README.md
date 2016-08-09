@@ -6,5 +6,5 @@ To it works execute: gulp server
 
 You need to set environment variables as you wish (for example):
 
-export NODE_ENV=development
-export API_URL=http://dev.api.com/
+export NODE_ENV=development<br/>
+export API_URL=http://dev.api.com/<br/>
