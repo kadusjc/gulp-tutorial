@@ -7,10 +7,17 @@ const minify = require('gulp-minify')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify')
 const browserSync = require('browser-sync').create()
-const preprocess = require('gulp-preprocess');
+const preprocess = require('gulp-preprocess')
 const del = require('del')
+const jshint = require('gulp-jshint')
 
-gulp.task('default', ['images', 'styles', 'scripts'])
+gulp.task('default', ['images', 'styles', 'scripts', 'lint'])
+
+gulp.task('lint', () => {
+  return gulp.src('./src/scripts/**/*.js')
+    .pipe(jshint({esnext: true}))
+    .pipe(jshint.reporter('default'));
+})
 
 gulp.task('server', ['images', 'styles', 'scripts'], () => {
   browserSync.init({
@@ -23,7 +30,7 @@ gulp.task('server', ['images', 'styles', 'scripts'], () => {
   })
 })
 
-gulp.task('clean', function() {
+gulp.task('clean', () => {
  return del([
     'public/images',
     'public/scripts',

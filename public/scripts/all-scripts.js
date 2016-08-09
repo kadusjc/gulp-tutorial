@@ -1,1 +1,1 @@
-var multiplicacao=function(n,o){return n*o},soma=function(n,o){return n+o};window.App={},window.App.Env="staging",window.App.Url="http://stg.app.com";const folder=function(){console.log("Folder Script")};
+var multiplicacao=function(o,n){return o*n},soma=function(o,n){return o+n};window.App={},window.App.Env="local",window.App.Url="localhost:101001";const folder=function(){console.log("Folder Script")};

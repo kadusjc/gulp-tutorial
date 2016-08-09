@@ -1,3 +1,3 @@
 const folder = function () {
-  console.log('Folder Script')
-}
+  console.log('Folder Script');
+};
