@@ -1,0 +1,1 @@
+var multiplicacao=function(o,n){return o*n},soma=function(o,n){return o+n};const folder=function(){console.log("Folder Script")};
