@@ -2,7 +2,7 @@
 Studying Gulp Tutorial
 
 A simple example using ordinary Gulp Tasks. Free to read, use, copy, etc.<br/>
-To it works execute: <strong>gulp server</strong><br/>
+To it works execute: <strong>npm start</strong><br/>
 
 You need to set environment variables as you wish (for example):
 
